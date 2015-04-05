@@ -3,24 +3,24 @@ public class Board {
 	private Piece[][] board = new Piece[8][8];
 	
 	private void init() {
-		for (int x = 1 ; x < 7; x += 2 ) {
-			board[x][0] = new Piece( new Coordinate(x,0), Color.WHITE );
-		}
-		for (int x = 0 ; x < 8; x += 2 ) {
-			board[x][1] = new Piece( new Coordinate(x,1), Color.WHITE );
+		for (int x = 0 ; x < 7; x += 2 ) {
+			board[x][0] = new Piece( new Coordinate(x,0), Color.BLACK );
 		}
 		for (int x = 1 ; x < 8; x += 2 ) {
-			board[x][2] = new Piece( new Coordinate(x,2), Color.WHITE );
+			board[x][1] = new Piece( new Coordinate(x,1), Color.BLACK );
+		}
+		for (int x = 0 ; x < 8; x += 2 ) {
+			board[x][2] = new Piece( new Coordinate(x,2), Color.BLACK );
 		}
 		
+		for (int x = 1 ; x < 8; x += 2 ) {
+			board[x][5] = new Piece( new Coordinate(x,5), Color.WHITE );
+		}
 		for (int x = 0 ; x < 8; x += 2 ) {
-			board[x][5] = new Piece( new Coordinate(x,5), Color.BLACK );
+			board[x][6] = new Piece( new Coordinate(x,6), Color.WHITE );
 		}
 		for (int x = 1 ; x < 8; x += 2 ) {
-			board[x][6] = new Piece( new Coordinate(x,6), Color.BLACK );
-		}
-		for (int x = 0 ; x < 8; x += 2 ) {
-			board[x][7] = new Piece( new Coordinate(x,7), Color.BLACK );
+			board[x][7] = new Piece( new Coordinate(x,7), Color.WHITE );
 		}
 	}
 	
@@ -40,7 +40,7 @@ public class Board {
 					result += 'B';
 				}
 			}
-			result += "\n";
+			//result += "\n";
 		}
 		return result;
 	}

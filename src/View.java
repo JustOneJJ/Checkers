@@ -33,13 +33,7 @@ public class View extends JFrame{
 	    JPanel panel = new JPanel(new GridLayout(8,8,0,0));
 	    
 	    boolean change = true;
-//{0, 2, 4, 6, 9, 11, 13, 14, 15, 17, 19, 21}
-	   
-	    final List<Integer> blackpieces = Arrays.asList( 0, 2, 4, 6, 9, 11, 13, 15, 16, 18, 20, 22);
-	    final List<Integer> whitepieces = Arrays.asList(41, 43, 45, 47, 48, 50, 52, 54, 57, 59, 61, 63);
-	    
-
-	    
+  
 	    for(int i=0 ; i<64 ; i++){
 	    	ImageIcon b;
 	    	
@@ -56,18 +50,9 @@ public class View extends JFrame{
 	    			change = false;
 	    		}	
 	    	}
-	    	
-	 
-	    	if( whitepieces.contains(i) ){
-	    		b = new ImageIcon("img/whitepiece.gif");
-	    	}
-	    	
-	    	if( blackpieces.contains(i) ){
-	    		b = new ImageIcon("img/blackpiece.gif");
-	    	}
-	    	
+	    	    	
 	        bArray[i] = new JButton(b);	        
-	        bArray[i].setActionCommand(i+"");	        	        
+	        bArray[i].setActionCommand(i%8+ ""+ i/8);	        	        
 	        bArray[i].setPreferredSize(new Dimension(64, 64));
 	        panel.add(bArray[i]);
 	    }
@@ -100,6 +85,20 @@ public class View extends JFrame{
 				this.bArray[i].setIcon(b);
 			}else if(c == 'W'){
 				ImageIcon b = new ImageIcon("img/whitepiece.gif");
+				this.bArray[i].setIcon(b);
+			}
+		}
+	}
+	
+	void setEmptyBoard(){
+		String s = "1010101001010101101010100101010110101010010101011010101001010101";
+		for(int i = 0; i<64; i++){
+			char c = s.charAt(i);
+			if(c == '0'){
+				ImageIcon b = new ImageIcon("img/black.gif");
+				this.bArray[i].setIcon(b);
+			}else if(c == '1'){
+				ImageIcon b = new ImageIcon("img/gray.gif");
 				this.bArray[i].setIcon(b);
 			}
 		}

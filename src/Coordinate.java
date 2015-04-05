@@ -32,5 +32,9 @@ public final class Coordinate {
 	public void setY(int y) {
 		this.y = y;
 	}
+	
+	public String print() {
+		return (this.x + "" + this.y); 
+	}
 
 }

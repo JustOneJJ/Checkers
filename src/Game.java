@@ -7,6 +7,10 @@ public class Game {
 		
 		Controller theController = new Controller(theModel, theView);
 		
+		String init = theModel.getBoardString();
+		theView.setEmptyBoard();
+		theView.setPieces(init);
+		
 		theView.setVisible(true);
 	}
 }
