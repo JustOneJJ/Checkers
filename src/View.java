@@ -5,7 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Panel;
-//import java.awt.event.ActionListener;
+import java.awt.event.ActionListener;
 
 import java.util.Arrays;
 import java.util.List;
@@ -80,6 +80,29 @@ public class View extends JFrame{
 	    this.pack();
 	    this.setSize(530,530);
 	    this.setMinimumSize(new Dimension(600,600));
+	}
+	
+	public void setTextField1(String s){
+		this.lab.setText(s);
+	}
+	
+	void addBoardListener(ActionListener listenForButton ){
+		for(int i = 0 ; i < 64; i++){
+			this.bArray[i].addActionListener(listenForButton);
+		}
+	}
+	
+	void setPieces(String s){
+		for(int i = 0; i<64; i++){
+			char c = s.charAt(i);
+			if(c == 'B'){
+				ImageIcon b = new ImageIcon("img/blackpiece.gif");
+				this.bArray[i].setIcon(b);
+			}else if(c == 'W'){
+				ImageIcon b = new ImageIcon("img/whitepiece.gif");
+				this.bArray[i].setIcon(b);
+			}
+		}
 	}
 	
 }
