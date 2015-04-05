@@ -8,7 +8,6 @@ import java.awt.Panel;
 //import java.awt.event.ActionListener;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 import javax.swing.*;
@@ -37,7 +36,7 @@ public class View extends JFrame{
 //{0, 2, 4, 6, 9, 11, 13, 14, 15, 17, 19, 21}
 	   
 	    final List<Integer> blackpieces = Arrays.asList( 0, 2, 4, 6, 9, 11, 13, 15, 16, 18, 20, 22);
-		int[] whitepieces = new int[]{41, 43, 45, 47, 48, 50, 52, 54, 57, 59, 61, 63};
+	    final List<Integer> whitepieces = Arrays.asList(41, 43, 45, 47, 48, 50, 52, 54, 57, 59, 61, 63);
 	    
 
 	    
@@ -59,7 +58,7 @@ public class View extends JFrame{
 	    	}
 	    	
 	 
-	    	if( Arrays.asList(whitepieces).contains(i) ){
+	    	if( whitepieces.contains(i) ){
 	    		b = new ImageIcon("img/whitepiece.gif");
 	    	}
 	    	
