@@ -21,8 +21,11 @@ public class Test {
 	
 	public static void main(String[] args) {
 		
-		Board b = new Board();
-		System.out.println(b.print());
+		
+		View theView = new View();
+		theView.setVisible(true);
+		//Board b = new Board();
+		//System.out.println(b.print());
 /*		Coordinate c = new Coordinate(1,6);
 		System.out.println( c.toString() );
 		
