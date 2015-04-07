@@ -59,5 +59,4 @@ public class Board {
 		Coordinate c = p.getCoordinate();
 		board[c.x()][c.y()] = p;
 	}
-
 }
