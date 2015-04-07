@@ -19,10 +19,9 @@ public class View extends JFrame{
 	private JLabel lab = new JLabel("This is North");
 	private JButton[] bArray = new JButton[64];
 
-	View(){
+	View(){	    
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		JPanel parent = new JPanel(new BorderLayout());
 	    Panel p = new Panel();
         p.add(lab);
@@ -64,6 +63,7 @@ public class View extends JFrame{
 	    this.setContentPane(parent);
 	    this.pack();
 	    this.setSize(530,530);
+	    this.setSize(531,531);
 	    this.setMinimumSize(new Dimension(600,600));
 	}
 	

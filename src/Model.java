@@ -11,4 +11,14 @@ public class Model {
 	public String getBoardString(){
 		return b.print();
 	}
+	
+	public boolean isEmpty(Coordinate c){
+		Piece p = b.takePiece(c);
+		if (p == null){
+			return true;
+		}else{
+			b.placePice(p);
+			return false;
+		}
+	}
 }
