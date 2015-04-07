@@ -20,9 +20,12 @@ public class Controller {
 		public void actionPerformed(ActionEvent e){
 			
 			if(status){
-				this.status = false;
+				//this.status = false;
 				this.from = this.extractCoordinate(e.getActionCommand());
 				theView.setTextField1(this.from.print());
+				if( !theModel.isEmpty(this.from)){
+					this.status = false;
+				}
 			}else{
 				this.status = true;
 				Coordinate to = this.extractCoordinate(e.getActionCommand());
