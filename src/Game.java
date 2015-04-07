@@ -5,6 +5,7 @@ public class Game {
 		View theView = new View();
 		Model theModel = new Model();
 		
+		@SuppressWarnings("unused")
 		Controller theController = new Controller(theModel, theView);
 		
 		String init = theModel.getBoardString();
