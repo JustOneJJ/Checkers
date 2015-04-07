@@ -1,54 +1,36 @@
-import java.util.Scanner;
-
-
+// I use this for on the fly testing
 public class Test {
-
-	/**
-	 * @param args
-	 */
-	
-	public static int getInput(){
-	    @SuppressWarnings("resource")
-		Scanner sc = new Scanner(System.in);
-	        while (!sc.hasNextInt()) {
-	            System.out.println("That's not a number!");
-	            sc.next();
-	        }
-	        int number = sc.nextInt();
-	        //sc.close();
-	        return number;
-	}
 	
 	public static void main(String[] args) {
 		
-		
-		View theView = new View();
-		theView.setVisible(true);
-		//Board b = new Board();
-		//System.out.println(b.print());
-/*		Coordinate c = new Coordinate(1,6);
-		System.out.println( c.toString() );
-		
-		
-		Piece p1 = new Piece(c, Color.WHITE);
-		System.out.println( p1.toString() );
-		
-		System.out.println( p1.isInPosition(c) );
-		c.setX(7);
-		System.out.println( p1.isInPosition(c) );
-		
-		System.out.println("Enter X coordinate:");
-		int x = getInput();
-		System.out.println("Enter Y coordinate:");
-		int y = getInput();
-		
-		Coordinate custom = new Coordinate(x,y);
-		System.out.println(custom);
-		p1.println();
-		abc
-		def
-	*/	
-		
+	Coordinate c1 = new Coordinate(1,1);
+	Coordinate c2 = new Coordinate(2,2);
+	
+	Action a = new Action(c1, c2);
+	
+	Action a2 = new Action(a);
+	
+	System.out.println(a.print());
+	System.out.println(a2.print());
+	
+	c1.setX(3);
+	
+	a2.setSource(new Coordinate (31,41));
+	System.out.println(a.print());
+	System.out.println(a2.print());
+	
+	Piece p1 = new Piece(c1, Color.WHITE);
+	Piece p2 = new Piece(p1);
+	
+	Coordinate c3 = new Coordinate(5,5);
+	p1.setCoordinate(c3);
+	c3.setY(15);
+	p1.setColor(Color.BLACK);
+	
+	System.out.println(p1.print());
+	System.out.println(p2.print());
+	System.out.println(Piece.getCount());	
 	}
+	
 	
 }

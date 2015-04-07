@@ -34,7 +34,7 @@ public final class Coordinate {
 	}
 	
 	public String print() {
-		return (this.x + "" + this.y); 
+		return ("[" + this.x + ";" + this.y + "]"); 
 	}
 
 }
