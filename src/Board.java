@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class Board {
@@ -27,17 +29,32 @@ public class Board {
 		}
 		for (int x = 0 ; x < 8; x += 2 ) {
 			board[x][6] = new Piece( new Coordinate(x,6), Color.WHITE );
-			whitepieces.add(board[x][0]);
+			whitepieces.add(board[x][6]);
 		}
 		for (int x = 1 ; x < 8; x += 2 ) {
 			board[x][7] = new Piece( new Coordinate(x,7), Color.WHITE );
-			whitepieces.add(board[x][0]);
+			whitepieces.add(board[x][7]);
 		}
 	}
 	
 	Board(){
 		init();
 	}
+	
+	Board(Board other) {
+		Iterator<Piece> PieceIterator = other.whitepieces.iterator();
+		while(PieceIterator.hasNext()){
+			Piece copy = PieceIterator.next();
+			this.whitepieces.add(new Piece(copy));
+			this.placePice(copy);
+		}
+		PieceIterator = other.blackpieces.iterator();
+		while(PieceIterator.hasNext()){
+			Piece copy = PieceIterator.next();
+			this.blackpieces.add(new Piece(copy));
+			this.placePice(copy);
+		}
+	};
 	
 	public String print() {
 		String result = "";
@@ -58,16 +75,72 @@ public class Board {
 	
 	public Piece takePiece(Coordinate c) {
 		Piece p = board[c.x()][c.y()];
-		board[c.x()][c.y()] = null;
+		removePiece(c);
 		return p;
 	}
 	
-	public void removePice(Coordinate c) {
+	public void removePiece(Coordinate c) {
+		if (board[c.x()][c.y()] == null)
+			return;
+		if (board[c.x()][c.y()].getColor() == Color.WHITE ){
+			this.whitepieces.remove(board[c.x()][c.y()]);
+		}
+		else {
+			this.blackpieces.remove(board[c.x()][c.y()]);
+		}
+		
 		board[c.x()][c.y()] = null;
 	}
 	
 	public void placePice(Piece p){
 		Coordinate c = p.getCoordinate();
 		board[c.x()][c.y()] = p;
+	}
+	
+	public void printPieces() {
+		Iterator<Piece> PieceIterator = this.whitepieces.iterator();
+		while(PieceIterator.hasNext()){
+			System.out.println(PieceIterator.next().print());
+		}
+		PieceIterator = this.blackpieces.iterator();
+		while(PieceIterator.hasNext()){
+			System.out.println(PieceIterator.next().print());
+		}
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((blackpieces == null) ? 0 : blackpieces.hashCode());
+		result = prime * result + Arrays.hashCode(board);
+		result = prime * result
+				+ ((whitepieces == null) ? 0 : whitepieces.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Board other = (Board) obj;
+		if (blackpieces == null) {
+			if (other.blackpieces != null)
+				return false;
+		} else if (!blackpieces.equals(other.blackpieces))
+			return false;
+		if (!Arrays.deepEquals(board, other.board))
+			return false;
+		if (whitepieces == null) {
+			if (other.whitepieces != null)
+				return false;
+		} else if (!whitepieces.equals(other.whitepieces))
+			return false;
+		return true;
 	}
 }

@@ -65,5 +65,36 @@ public class Piece {
 	public String print() {
 		return (this.c.print() + " " + this.value + " " + this.col);
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((c == null) ? 0 : c.hashCode());
+		result = prime * result + ((col == null) ? 0 : col.hashCode());
+		result = prime * result + value;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Piece other = (Piece) obj;
+		if (c == null) {
+			if (other.c != null)
+				return false;
+		} else if (!c.equals(other.c))
+			return false;
+		if (col != other.col)
+			return false;
+		if (value != other.value)
+			return false;
+		return true;
+	}
 	
 }
