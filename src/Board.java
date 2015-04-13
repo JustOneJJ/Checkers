@@ -8,7 +8,7 @@ public class Board {
 	private Piece[][] board = new Piece[8][8];
 	private List<Piece> whitepieces = new ArrayList<Piece>();
 	private List<Piece> blackpieces = new ArrayList<Piece>();
-	
+
 	private void init() {
 		for (int x = 0 ; x < 7; x += 2 ) {
 			board[x][0] = new Piece( new Coordinate(x,0), Color.BLACK );
@@ -45,16 +45,22 @@ public class Board {
 		Iterator<Piece> PieceIterator = other.whitepieces.iterator();
 		while(PieceIterator.hasNext()){
 			Piece copy = PieceIterator.next();
-			this.whitepieces.add(new Piece(copy));
 			this.placePice(copy);
 		}
 		PieceIterator = other.blackpieces.iterator();
 		while(PieceIterator.hasNext()){
 			Piece copy = PieceIterator.next();
-			this.blackpieces.add(new Piece(copy));
 			this.placePice(copy);
 		}
 	};
+	
+	public List<Piece> getWhitepieces() {
+		return whitepieces;
+	}
+
+	public List<Piece> getBlackpieces() {
+		return blackpieces;
+	}
 	
 	public String print() {
 		String result = "";
@@ -73,9 +79,13 @@ public class Board {
 		return result;
 	}
 	
+	public boolean isEmpty(Coordinate c){
+		return board[c.x()][c.y()] == null;
+	}
+	
 	public Piece takePiece(Coordinate c) {
 		Piece p = board[c.x()][c.y()];
-		removePiece(c);
+		this.removePiece(c);
 		return p;
 	}
 	
@@ -88,13 +98,18 @@ public class Board {
 		else {
 			this.blackpieces.remove(board[c.x()][c.y()]);
 		}
-		
-		board[c.x()][c.y()] = null;
+		this.board[c.x()][c.y()] = null;
 	}
 	
 	public void placePice(Piece p){
 		Coordinate c = p.getCoordinate();
 		board[c.x()][c.y()] = p;
+		if (p.getColor() == Color.WHITE ){
+			this.whitepieces.add(p);
+		}
+		else {
+			this.blackpieces.add(p);
+		}
 	}
 	
 	public void printPieces() {
@@ -102,10 +117,10 @@ public class Board {
 		while(PieceIterator.hasNext()){
 			System.out.println(PieceIterator.next().print());
 		}
-		PieceIterator = this.blackpieces.iterator();
-		while(PieceIterator.hasNext()){
-			System.out.println(PieceIterator.next().print());
-		}
+	//	PieceIterator = this.blackpieces.iterator();
+	//	while(PieceIterator.hasNext()){
+	//		System.out.println(PieceIterator.next().print());
+	//	}
 	}
 
 	@Override

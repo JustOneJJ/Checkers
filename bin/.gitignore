@@ -1,12 +1,1 @@
-/Action.class
-/Color.class
-/Controller$BoardListener.class
-/Controller.class
-/Coordinate.class
-/Model.class
-/Piece.class
-/Test.class
-/black.gif
-/blackpiece.gif
-/gray.gif
-/whitepiece.gif
+/GameState.class

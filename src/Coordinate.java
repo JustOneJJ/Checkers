@@ -63,5 +63,15 @@ public final class Coordinate {
 	public String print() {
 		return ("[" + this.x + ";" + this.y + "]"); 
 	}
+	
+	public boolean isValid() {
+		if( this.x < 0 || this.y < 0) {
+			return false;
+		}
+		if (this.x > 7 || this.y > 7) {
+			return false;
+		}
+		return true;
+	}
 
 }

@@ -60,7 +60,6 @@ public class View extends JFrame{
 	    this.setContentPane(parent);
 	    this.pack();
 	    this.setSize(530,530);
-	    this.setSize(531,531);
 	    this.setMinimumSize(new Dimension(600,600));
 	}
 	

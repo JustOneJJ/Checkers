@@ -1,24 +1,20 @@
 public class Model {
 
-	private Board b = new Board();
+	//private Board b = new Board();
+	private GameState state = new GameState();
 
 	public void move(Coordinate from, Coordinate to){
-		Piece p = b.takePiece(from);
-		p.setCoordinate(to);
-		b.placePice(p);
+		Action a = new Action(from, to);
+		System.out.println(a.print());
+		this.state = this.state.getNextGameState(a);
+		//this.state.printActions();
 	}
 	
 	public String getBoardString(){
-		return b.print();
+		return state.boardString();
 	}
 	
 	public boolean isEmpty(Coordinate c){
-		Piece p = b.takePiece(c);
-		if (p == null){
-			return true;
-		}else{
-			b.placePice(p);
-			return false;
-		}
+		return this.state.isEmpty(c);
 	}
 }
