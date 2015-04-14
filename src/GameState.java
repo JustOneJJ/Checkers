@@ -26,14 +26,31 @@ public class GameState {
 			while(PieceIterator.hasNext()) {
 				this.addActions(PieceIterator.next());
 				}
+			}else {
+				List<Piece> pieces = this.board.getBlackpieces();
+				Iterator<Piece> PieceIterator = pieces.iterator();
+				while(PieceIterator.hasNext()) {
+					this.addActions(PieceIterator.next());
+					}
 			}
 		}
 	
 	private void addActions(Piece p){
 		Coordinate src = p.getCoordinate();
-		if(p.getColor() == Color.WHITE){
+		if(p.getColor() == Color.WHITE && this.turn == Color.WHITE){
 			Coordinate dest1 = new Coordinate(src.x() - 1, src.y() - 1 );
 			Coordinate dest2 = new Coordinate(src.x() + 1, src.y() - 1 );
+			if (dest1.isValid() && this.board.isEmpty(dest1)){
+				Action a = new Action(new Coordinate(src), dest1);
+				this.actions.add(a);
+			}
+			if (dest2.isValid() && this.board.isEmpty(dest2)){
+				Action a = new Action(new Coordinate(src), dest2);
+				this.actions.add(a);
+			}
+		}else if (p.getColor() == Color.BLACK && this.turn == Color.BLACK){
+			Coordinate dest1 = new Coordinate(src.x() - 1, src.y() + 1 );
+			Coordinate dest2 = new Coordinate(src.x() + 1, src.y() + 1 );
 			if (dest1.isValid() && this.board.isEmpty(dest1)){
 				Action a = new Action(new Coordinate(src), dest1);
 				this.actions.add(a);
@@ -59,8 +76,11 @@ public class GameState {
 			Piece p = next.board.takePiece(a.getSource());
 			p.setCoordinate(a.getDestination());
 			next.board.placePice(p);
+			next.turn = (next.turn == Color.WHITE) ? Color.BLACK : Color.WHITE;
 		}
 		next.computeActions();
+		System.out.println("HEY");
+		next.printActions();
 		return next;
 	}
 	

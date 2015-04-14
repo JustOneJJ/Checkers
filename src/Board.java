@@ -117,10 +117,10 @@ public class Board {
 		while(PieceIterator.hasNext()){
 			System.out.println(PieceIterator.next().print());
 		}
-	//	PieceIterator = this.blackpieces.iterator();
-	//	while(PieceIterator.hasNext()){
-	//		System.out.println(PieceIterator.next().print());
-	//	}
+		PieceIterator = this.blackpieces.iterator();
+		while(PieceIterator.hasNext()){
+			System.out.println(PieceIterator.next().print());
+		}
 	}
 
 	@Override
