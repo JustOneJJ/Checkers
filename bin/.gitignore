@@ -1,1 +1,5 @@
 /GameState.class
+/GameState$CallBack.class
+/GameState$CallBackImpl.class
+/GameState$AddActions.class
+/GameState$AddTakingActions.class

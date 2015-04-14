@@ -79,6 +79,10 @@ public class Board {
 		return result;
 	}
 	
+	public Piece lookAtPiece(Coordinate c){
+		return board[c.x()][c.y()];
+	}
+	
 	public boolean isEmpty(Coordinate c){
 		return board[c.x()][c.y()] == null;
 	}
