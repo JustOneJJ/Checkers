@@ -25,13 +25,6 @@ public class Controller {
 			if(status){
 				//this.status = false;
 				this.from = this.extractCoordinate(e.getActionCommand());
-				theView.setTextField1("HEY HEY HEY");
-				try {
-					Thread.sleep(4000);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
 				theView.setTextField1(this.from.print());
 				if( !theModel.isEmpty(this.from)){
 					this.status = false;
@@ -40,9 +33,9 @@ public class Controller {
 				this.status = true;
 				Coordinate to = this.extractCoordinate(e.getActionCommand());
 				theModel.move(this.from, to);
-				String s = theModel.getBoardString();
-				theView.setEmptyBoard();
-				theView.setPieces(s);
+			//	String s = theModel.getBoardString();
+			//	theView.setEmptyBoard();
+			//	theView.setPieces(s);
 			}
 		}
 		

@@ -7,19 +7,20 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Panel;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.Observable;
 
 import javax.swing.*;
 
-public class View extends JFrame{
-	
-	private static final long serialVersionUID = 1L;
-	
+public class View implements java.util.Observer{
+		
 	private JLabel lab = new JLabel("This is North");
 	private JButton[] bArray = new JButton[64];
 
 	public View(){	    
-		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JFrame frame = new JFrame("simple MVC");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel parent = new JPanel(new BorderLayout());
 	    Panel p = new Panel();
         p.add(lab);
@@ -58,11 +59,18 @@ public class View extends JFrame{
 	    panel.setPreferredSize(new Dimension(512,512));
 	    parent.add("Center", newpanel);
 	        
-	    this.setContentPane(parent);
-	    this.pack();
-	    this.setSize(530,530);
-	    this.setMinimumSize(new Dimension(600,600));
+	    frame.setContentPane(parent);
+	    frame.pack();
+	    frame.setSize(530,530);
+	    frame.setMinimumSize(new Dimension(600,600));
+	    frame.setVisible(true);
 	}
+	
+	public void update(Observable obs, Object obj) {
+		System.out.println ("View      : Observable is " + obs.getClass() + ", object passed is " + obj.getClass());
+		this.setEmptyBoard();
+		this.setPieces( ((String)obj) );
+    	}
 	
 	public void setTextField1(String s){
 		this.lab.setText(s);
@@ -100,5 +108,12 @@ public class View extends JFrame{
 			}
 		}
 	}
+	
+	public static class CloseListener extends WindowAdapter {
+		public void windowClosing(WindowEvent e) {
+			e.getWindow().setVisible(false);
+			System.exit(0);
+		} //windowClosing()
+	} //CloseListener
 	
 }

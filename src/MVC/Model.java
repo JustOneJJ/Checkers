@@ -4,7 +4,7 @@ import Checkers.Action;
 import Checkers.Coordinate;
 import Checkers.GameState;
 
-public class Model {
+public class Model extends java.util.Observable {
 
 	//private Board b = new Board();
 	private GameState state = new GameState();
@@ -13,6 +13,8 @@ public class Model {
 		Action a = new Action(from, to);
 		this.state = this.state.getNextGameState(a);
 		this.state.printStatus();
+		setChanged();
+		notifyObservers(getBoardString());
 	}
 	
 	public String getBoardString(){

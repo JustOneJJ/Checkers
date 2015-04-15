@@ -11,6 +11,8 @@ public class Game {
 		View theView = new View();
 		Model theModel = new Model();
 		
+		theModel.addObserver(theView);
+		
 		@SuppressWarnings("unused")
 		Controller theController = new Controller(theModel, theView);
 		
@@ -18,6 +20,6 @@ public class Game {
 		theView.setEmptyBoard();
 		theView.setPieces(init);
 		
-		theView.setVisible(true);
+		//theView.setVisible(true);
 	}
 }
