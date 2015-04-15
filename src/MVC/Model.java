@@ -1,5 +1,6 @@
 package MVC;
 
+import Agents.*;
 import Checkers.Action;
 import Checkers.Coordinate;
 import Checkers.GameState;
@@ -11,6 +12,34 @@ public class Model extends java.util.Observable {
 
 	public void move(Coordinate from, Coordinate to){
 		Action a = new Action(from, to);
+		this.state = this.state.getNextGameState(a);
+		this.state.printStatus();
+		setChanged();
+		notifyObservers(getBoardString());
+		
+/*		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		Agent agent = new RandomAgent();
+		a = agent.computeAction(this.state);
+		this.state = this.state.getNextGameState(a);
+		this.state.printStatus();
+		setChanged();
+		notifyObservers(getBoardString());
+	*/	
+	}
+	
+	public void moveAgent(){
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		Agent agent = new RandomAgent();
+		Action a = agent.computeAction(this.state);
 		this.state = this.state.getNextGameState(a);
 		this.state.printStatus();
 		setChanged();

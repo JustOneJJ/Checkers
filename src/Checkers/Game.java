@@ -9,6 +9,7 @@ public class Game {
 	public static void main(String[] args){
 		
 		View theView = new View();
+
 		Model theModel = new Model();
 		
 		theModel.addObserver(theView);

@@ -64,6 +64,10 @@ public class GameState {
 		return this.board.print();
 	}
 	
+	public List<Action> getActions() {
+		return this.actions;
+	}
+	
 	public void printActions(){
 		Iterator<Action> actionIterator = this.actions.iterator();
 		while(actionIterator.hasNext()){

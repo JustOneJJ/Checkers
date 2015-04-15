@@ -17,9 +17,10 @@ public class View implements java.util.Observer{
 		
 	private JLabel lab = new JLabel("This is North");
 	private JButton[] bArray = new JButton[64];
+	JFrame frame = new JFrame("simple MVC");
 
 	public View(){	    
-		JFrame frame = new JFrame("simple MVC");
+		frame = new JFrame("simple MVC");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel parent = new JPanel(new BorderLayout());
 	    Panel p = new Panel();

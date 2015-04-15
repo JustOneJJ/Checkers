@@ -2,6 +2,8 @@ package MVC;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.SwingWorker;
+
 import Checkers.Coordinate;
 
 public class Controller {
@@ -25,7 +27,7 @@ public class Controller {
 			if(status){
 				//this.status = false;
 				this.from = this.extractCoordinate(e.getActionCommand());
-				theView.setTextField1(this.from.print());
+				theView.setTextField1(this.from.print());			    
 				if( !theModel.isEmpty(this.from)){
 					this.status = false;
 				}
@@ -33,9 +35,24 @@ public class Controller {
 				this.status = true;
 				Coordinate to = this.extractCoordinate(e.getActionCommand());
 				theModel.move(this.from, to);
-			//	String s = theModel.getBoardString();
-			//	theView.setEmptyBoard();
-			//	theView.setPieces(s);
+				//==========
+			    SwingWorker<String, Object> worker = new SwingWorker<String, Object>() {
+			        @Override
+			        protected String doInBackground() throws Exception { 
+			        	theModel.moveAgent();
+			        	return "DONE";
+			        }
+			        @Override
+			        protected void done() {
+			            try {
+			            	theView.setTextField1("4 sec passed");
+			            } catch (Exception e) {
+			                //ignore
+			            }
+			        }
+			    };      
+			    worker.execute();
+			    //=========
 			}
 		}
 		
