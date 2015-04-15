@@ -1,3 +1,4 @@
+package Checkers;
 public class Piece {
 
 	private static int count = 0;

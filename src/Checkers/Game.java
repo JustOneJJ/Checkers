@@ -1,3 +1,9 @@
+package Checkers;
+
+import MVC.Controller;
+import MVC.Model;
+import MVC.View;
+
 public class Game {
 
 	public static void main(String[] args){

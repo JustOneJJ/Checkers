@@ -1,9 +1,10 @@
+package Checkers;
 public class Action {
 
 	private Coordinate source;
 	private Coordinate destination;
 	
-	Action(Coordinate src, Coordinate dest) {
+	public Action(Coordinate src, Coordinate dest) {
 		this.source = new Coordinate(src);
 		this.destination = new Coordinate(dest);
 	}

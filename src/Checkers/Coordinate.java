@@ -1,3 +1,4 @@
+package Checkers;
 public final class Coordinate {
 	private int x;
 	private int y;

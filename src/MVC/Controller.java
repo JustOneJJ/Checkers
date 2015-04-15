@@ -1,12 +1,15 @@
+package MVC;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import Checkers.Coordinate;
 
 public class Controller {
 		
 	private Model theModel;
 	private View theView;
 	
-	Controller(Model theModel, View theView){
+	public Controller(Model theModel, View theView){
 		this.theModel = theModel;
 		this.theView = theView;
 		
@@ -22,6 +25,13 @@ public class Controller {
 			if(status){
 				//this.status = false;
 				this.from = this.extractCoordinate(e.getActionCommand());
+				theView.setTextField1("HEY HEY HEY");
+				try {
+					Thread.sleep(4000);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				theView.setTextField1(this.from.print());
 				if( !theModel.isEmpty(this.from)){
 					this.status = false;

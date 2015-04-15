@@ -1,3 +1,9 @@
+package MVC;
+
+import Checkers.Action;
+import Checkers.Coordinate;
+import Checkers.GameState;
+
 public class Model {
 
 	//private Board b = new Board();
@@ -5,9 +11,8 @@ public class Model {
 
 	public void move(Coordinate from, Coordinate to){
 		Action a = new Action(from, to);
-		System.out.println(a.print());
 		this.state = this.state.getNextGameState(a);
-		//this.state.printActions();
+		this.state.printStatus();
 	}
 	
 	public String getBoardString(){

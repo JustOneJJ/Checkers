@@ -1,3 +1,4 @@
+package MVC;
 import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Dimension;
@@ -16,7 +17,7 @@ public class View extends JFrame{
 	private JLabel lab = new JLabel("This is North");
 	private JButton[] bArray = new JButton[64];
 
-	View(){	    
+	public View(){	    
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel parent = new JPanel(new BorderLayout());
@@ -73,7 +74,7 @@ public class View extends JFrame{
 		}
 	}
 	
-	void setPieces(String s){
+	public void setPieces(String s){
 		for(int i = 0; i<64; i++){
 			char c = s.charAt(i);
 			if(c == 'B'){
@@ -86,7 +87,7 @@ public class View extends JFrame{
 		}
 	}
 	
-	void setEmptyBoard(){
+	public void setEmptyBoard(){
 		String s = "1010101001010101101010100101010110101010010101011010101001010101";
 		for(int i = 0; i<64; i++){
 			char c = s.charAt(i);

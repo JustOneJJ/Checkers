@@ -1,3 +1,4 @@
+package Checkers;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -9,7 +10,7 @@ public class GameState {
 	private List<Action> actions = new ArrayList<Action>();
 	private List<Action> takingActions = new ArrayList<Action>();
 
-	GameState(){
+	public GameState(){
 		this.board = new Board();
 		this.turn = Color.WHITE;
 		this.computeActions();
@@ -18,6 +19,13 @@ public class GameState {
 	GameState(GameState other) {
 		this.board = new Board(other.board);
 		this.turn = other.turn;
+	}
+	
+	public void printStatus() {
+		System.out.println("Turn: " + this.turn);
+		System.out.println("White Pieces: " + this.board.getWhitepieces().size());
+		System.out.println("Black Pieces: " + this.board.getBlackpieces().size());
+		this.printActions();
 	}
 	
 	public void computeActions(){
