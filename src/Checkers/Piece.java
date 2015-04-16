@@ -6,6 +6,7 @@ public class Piece {
 	
 	private Coordinate c;
 	private Color col = Color.WHITE;
+	private boolean promoted = false;
 	
 	Piece(){
 		Piece.count++;
@@ -15,6 +16,7 @@ public class Piece {
 		this();
 		this.c = new Coordinate(c);
 		this.col = col;
+		this.promoted = false;
 	}
 	
 	//copy constructor
@@ -49,6 +51,14 @@ public class Piece {
 
 	public Color getColor() {
 		return col;
+	}
+	
+	public boolean isPromoted(){
+		return this.promoted;
+	}
+	
+	public void promote() {
+		this.promoted = true;
 	}
 	
 	public static int getCount() {

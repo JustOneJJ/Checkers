@@ -92,6 +92,12 @@ public class View implements java.util.Observer{
 			}else if(c == 'W'){
 				ImageIcon b = new ImageIcon("img/whitepiece.gif");
 				this.bArray[i].setIcon(b);
+			}else if(c == '1'){
+				ImageIcon b = new ImageIcon("img/whitePromoted.gif");
+				this.bArray[i].setIcon(b);
+			}else if(c == '2'){
+				ImageIcon b = new ImageIcon("img/blackPromoted.gif");
+				this.bArray[i].setIcon(b);
 			}
 		}
 	}
@@ -107,6 +113,7 @@ public class View implements java.util.Observer{
 				ImageIcon b = new ImageIcon("img/gray.gif");
 				this.bArray[i].setIcon(b);
 			}
+			
 		}
 	}
 	

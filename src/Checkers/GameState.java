@@ -21,8 +21,15 @@ public class GameState {
 		this.turn = other.turn;
 	}
 	
+	public int StateScore() {
+		int piecesDif = this.board.getWhitepieces().size() - 
+					 this.board.getBlackpieces().size();
+		return piecesDif;
+	}
+	
 	public void printStatus() {
 		System.out.println("Turn: " + this.turn);
+		System.out.println("Score: " + this.StateScore());
 		System.out.println("White Pieces: " + this.board.getWhitepieces().size());
 		System.out.println("Black Pieces: " + this.board.getBlackpieces().size());
 		this.printActions();
@@ -30,7 +37,9 @@ public class GameState {
 	
 	public void computeActions(){
 		this.forEachPiece(new AddTakingActions());
-		this.forEachPiece(new AddActions());
+		if (this.actions.size() == 0){
+			this.forEachPiece(new AddActions());
+		}
 		}
 		
 	public boolean hasAction(Action a) {

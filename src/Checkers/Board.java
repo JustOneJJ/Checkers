@@ -70,9 +70,17 @@ public class Board {
 				if (this.board[x][y] == null){
 					result += '0';	
 				}else if( this.board[x][y].getColor() == Color.WHITE ){
-					result += 'W';
+					if(this.board[x][y].isPromoted()){
+						result += '1';
+					}else {
+						result += 'W';
+					}
 				}else{
-					result += 'B';
+					if(this.board[x][y].isPromoted()){
+						result += '2';
+					}else {
+						result += 'B';
+					}
 				}
 			}
 			//result += "\n";
@@ -110,9 +118,15 @@ public class Board {
 		Coordinate c = p.getCoordinate();
 		board[c.x()][c.y()] = p;
 		if (p.getColor() == Color.WHITE ){
+			if(c.y() == 0){
+				p.promote();
+			}
 			this.whitepieces.add(p);
 		}
 		else {
+			if(c.y() == 7){
+				p.promote();
+			}
 			this.blackpieces.add(p);
 		}
 	}
