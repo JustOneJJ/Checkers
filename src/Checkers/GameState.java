@@ -101,46 +101,53 @@ public class GameState {
 
 	class AddActions implements CallBack {
 		
+		private Coordinate[] dest = new Coordinate[4];
+		
 	    public void methodToCallBack(Piece p, GameState state) {
 	    	if (p.getColor() != state.turn)
 	    		return;
 			Coordinate src = p.getCoordinate();
-			Coordinate dest1 = null, dest2 = null;
-			if(p.getColor() == Color.WHITE && state.turn == Color.WHITE){
-				dest1 = new Coordinate(src.x() - 1, src.y() - 1 );
-				dest2 = new Coordinate(src.x() + 1, src.y() - 1 );
-			}else if (p.getColor() == Color.BLACK && state.turn == Color.BLACK){
-				dest1 = new Coordinate(src.x() - 1, src.y() + 1 );
-				dest2 = new Coordinate(src.x() + 1, src.y() + 1 );
+			if( (p.getColor() == Color.WHITE && state.turn == Color.WHITE)||p.isPromoted() ){
+				dest[0] = new Coordinate(src.x() - 1, src.y() - 1 );
+				dest[1] = new Coordinate(src.x() + 1, src.y() - 1 );
+				for(int i = 0; i<2; i++){
+					if (dest[i].isValid() && state.board.isEmpty(dest[i])){
+						Action a = new Action(new Coordinate(src), new Coordinate(dest[i]));
+						state.actions.add(a);
+					}	
+				}
+			}
+			if( (p.getColor() == Color.BLACK && state.turn == Color.BLACK) || p.isPromoted() ){
+				dest[2] = new Coordinate(src.x() - 1, src.y() + 1 );
+				dest[3] = new Coordinate(src.x() + 1, src.y() + 1 );
+				for(int i = 2; i<4; i++){
+					if (dest[i].isValid() && state.board.isEmpty(dest[i])){
+						Action a = new Action(new Coordinate(src), new Coordinate(dest[i]));
+						state.actions.add(a);
+					}	
+				}
 			}	
-			if (dest1.isValid() && state.board.isEmpty(dest1)){
-				Action a = new Action(new Coordinate(src), dest1);
-				state.actions.add(a);
-			}
-			if (dest2.isValid() && state.board.isEmpty(dest2)){
-				Action a = new Action(new Coordinate(src), dest2);
-				state.actions.add(a);
-			}
 	    }
 	}
 	
 	class AddTakingActions implements CallBack {
 		
-		private Coordinate[] possibleDest = new Coordinate[2];
-		private Coordinate[] inbetween = new Coordinate[2];
+		private Coordinate[] possibleDest = new Coordinate[4];
+		private Coordinate[] inbetween = new Coordinate[4];
 		
 		private void calculatePossibleDest(Piece p, Color c){
 			Coordinate src = p.getCoordinate();
-			if(c == Color.WHITE){
+			if( (c == Color.WHITE)|| p.isPromoted() ){
 				possibleDest[0] = new Coordinate(src.x()+2, src.y()-2);
 				inbetween[0]    = new Coordinate(src.x()+1, src.y()-1);
 				possibleDest[1] = new Coordinate(src.x()-2, src.y()-2);
 				inbetween[1]    = new Coordinate(src.x()-1, src.y()-1);
-			}else{
-				possibleDest[0] = new Coordinate(src.x()+2, src.y()+2);
-				inbetween[0]    = new Coordinate(src.x()+1, src.y()+1);
-				possibleDest[1] = new Coordinate(src.x()-2, src.y()+2);
-				inbetween[1]    = new Coordinate(src.x()-1, src.y()+1);
+			}
+			if( (c == Color.BLACK)|| p.isPromoted()){
+				possibleDest[2] = new Coordinate(src.x()+2, src.y()+2);
+				inbetween[2]    = new Coordinate(src.x()+1, src.y()+1);
+				possibleDest[3] = new Coordinate(src.x()-2, src.y()+2);
+				inbetween[3]    = new Coordinate(src.x()-1, src.y()+1);
 			}
 		}
 		
@@ -149,12 +156,22 @@ public class GameState {
 	    		return;
 			calculatePossibleDest(p, state.turn);
 			Coordinate src = p.getCoordinate();
-			for(int i = 0;i<2;i++){
-				if (this.possibleDest[i].isValid() 
-					&& state.board.isEmpty(this.possibleDest[i]) 
-					&& !state.board.isEmpty(this.inbetween[i])
-					&& state.board.lookAtPiece(inbetween[i]).getColor() != state.turn){
-						Action a = new Action(new Coordinate(src), this.possibleDest[i]);
+			int index, max;
+			
+			if(p.isPromoted()){
+				index = 0; max = 4; 
+			}else if(state.turn == Color.WHITE){
+				index = 0; max = 2;
+			}else{
+				index = 2; max = 4;
+			}
+			
+			for(; index<max; index++){
+				if (this.possibleDest[index].isValid() 
+					&& state.board.isEmpty(this.possibleDest[index]) 
+					&& !state.board.isEmpty(this.inbetween[index])
+					&& state.board.lookAtPiece(inbetween[index]).getColor() != state.turn){
+						Action a = new Action(new Coordinate(src), new Coordinate(this.possibleDest[index]));
 						System.out.println("YES!");
 						state.actions.add(a);
 						state.takingActions.add(a);

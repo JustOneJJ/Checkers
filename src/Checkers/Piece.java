@@ -25,6 +25,7 @@ public class Piece {
 		this.setCoordinate(other.getCoordinate());
 		this.col = other.getColor();
 		this.value = other.getValue();
+		this.promoted = other.isPromoted();
 	}
 	
 	public boolean isInPosition(Coordinate c ){
@@ -83,6 +84,7 @@ public class Piece {
 		int result = 1;
 		result = prime * result + ((c == null) ? 0 : c.hashCode());
 		result = prime * result + ((col == null) ? 0 : col.hashCode());
+		result = prime * result + (promoted ? 1231 : 1237);
 		result = prime * result + value;
 		return result;
 	}
@@ -103,9 +105,12 @@ public class Piece {
 			return false;
 		if (col != other.col)
 			return false;
+		if (promoted != other.promoted)
+			return false;
 		if (value != other.value)
 			return false;
 		return true;
 	}
+	
 	
 }
