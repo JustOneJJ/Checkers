@@ -17,19 +17,7 @@ public class Model extends java.util.Observable {
 		setChanged();
 		notifyObservers(getBoardString());
 		
-/*		try {
-			Thread.sleep(4000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		Agent agent = new RandomAgent();
-		a = agent.computeAction(this.state);
-		this.state = this.state.getNextGameState(a);
-		this.state.printStatus();
-		setChanged();
-		notifyObservers(getBoardString());
-	*/	
+		moveAgent();
 	}
 	
 	public void moveAgent(){

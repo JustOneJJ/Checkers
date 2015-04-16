@@ -22,7 +22,7 @@ public class Controller {
 		private boolean status = true;
 		private Coordinate from;
 		
-		public void actionPerformed(ActionEvent e){
+		public void actionPerformed(final ActionEvent e){
 			
 			if(status){
 				//this.status = false;
@@ -33,13 +33,15 @@ public class Controller {
 				}
 			}else{
 				this.status = true;
-				Coordinate to = this.extractCoordinate(e.getActionCommand());
-				theModel.move(this.from, to);
+				//Coordinate to = this.extractCoordinate(e.getActionCommand());
+				//theModel.move(this.from, to);
 				//==========
 			    SwingWorker<String, Object> worker = new SwingWorker<String, Object>() {
 			        @Override
 			        protected String doInBackground() throws Exception { 
-			        	theModel.moveAgent();
+			        	//theModel.moveAgent();
+			        	Coordinate to = extractCoordinate(e.getActionCommand());
+			        	theModel.move(from, to);
 			        	return "DONE";
 			        }
 			        @Override
