@@ -45,12 +45,12 @@ public class Board {
 	Board(Board other) {
 		Iterator<Piece> PieceIterator = other.whitepieces.iterator();
 		while(PieceIterator.hasNext()){
-			Piece copy = PieceIterator.next();
+			Piece copy = new Piece(PieceIterator.next());
 			this.placePice(copy);
 		}
 		PieceIterator = other.blackpieces.iterator();
 		while(PieceIterator.hasNext()){
-			Piece copy = PieceIterator.next();
+			Piece copy = new Piece(PieceIterator.next());
 			this.placePice(copy);
 		}
 	};

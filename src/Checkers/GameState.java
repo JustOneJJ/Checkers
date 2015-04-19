@@ -19,6 +19,7 @@ public class GameState {
 	public GameState(GameState other) {
 		this.board = new Board(other.board);
 		this.turn = other.turn;
+		this.computeActions();
 	}
 	
 	public int StateScore() {
@@ -36,6 +37,8 @@ public class GameState {
 	}
 	
 	public void computeActions(){
+		this.actions.clear();
+		this.takingActions.clear();
 		this.forEachPiece(new AddTakingActions());
 		if (this.actions.size() == 0){
 			this.forEachPiece(new AddActions());
@@ -60,9 +63,8 @@ public class GameState {
 				next.board.removePiece(mid);
 			}
 			Piece p = next.board.takePiece(a.getSource());
-			System.out.println("cant be");
-			System.out.println(p == null);
-			System.out.println(a.print());
+			//System.out.println(p == null);
+			//System.out.println(a.print());
 			p.setCoordinate(a.getDestination());
 			next.board.placePice(p);
 			next.turn = (next.turn == Color.WHITE) ? Color.BLACK : Color.WHITE;
@@ -196,6 +198,10 @@ public class GameState {
 	
 	public Color getTurn(){ 
 		return this.turn;
+	}
+	
+	public Board getBoard(){
+		return this.board;
 	}
 	
 }

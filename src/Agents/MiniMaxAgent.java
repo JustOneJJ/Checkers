@@ -16,6 +16,7 @@ public class MiniMaxAgent extends RandomAgent implements Agent{
 	}
 	
 	public Action computeAction(GameState state){
+		
 		this.plays = state.getTurn();
 		Result res = minimax(state, 4);
 		return res.getAction();
@@ -30,7 +31,7 @@ public class MiniMaxAgent extends RandomAgent implements Agent{
 			return new Result( null, super.EvaluateState(state));
 		}
 		//maximize
-		if(this.plays == state.getTurn()){
+		if(this.plays == Color.WHITE){
 			int bestValue = -99999999;
 			List<Action> actions = state.getActions();
 			Iterator<Action> actionIterator = actions.iterator();
