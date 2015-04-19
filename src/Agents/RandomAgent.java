@@ -15,5 +15,7 @@ public class RandomAgent implements Agent {
 		int index = randomGenerator.nextInt(possibleActions.size());
 		return possibleActions.get(index);
 	}
+	
+	
 
 }

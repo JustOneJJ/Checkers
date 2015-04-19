@@ -6,4 +6,5 @@ import Checkers.GameState;
 public interface Agent {
 	
 	public Action computeAction(GameState state);
+	
 }
