@@ -16,7 +16,7 @@ public class GameState {
 		this.computeActions();
 	}
 	
-	GameState(GameState other) {
+	public GameState(GameState other) {
 		this.board = new Board(other.board);
 		this.turn = other.turn;
 	}
@@ -60,12 +60,15 @@ public class GameState {
 				next.board.removePiece(mid);
 			}
 			Piece p = next.board.takePiece(a.getSource());
+			System.out.println("cant be");
+			System.out.println(p == null);
+			System.out.println(a.print());
 			p.setCoordinate(a.getDestination());
 			next.board.placePice(p);
 			next.turn = (next.turn == Color.WHITE) ? Color.BLACK : Color.WHITE;
 		}
 		next.computeActions();
-		next.printActions();
+		//next.printActions();
 		return next;
 	}
 	
@@ -172,7 +175,7 @@ public class GameState {
 					&& !state.board.isEmpty(this.inbetween[index])
 					&& state.board.lookAtPiece(inbetween[index]).getColor() != state.turn){
 						Action a = new Action(new Coordinate(src), new Coordinate(this.possibleDest[index]));
-						System.out.println("YES!");
+						//System.out.println("YES!");
 						state.actions.add(a);
 						state.takingActions.add(a);
 				}
@@ -189,6 +192,10 @@ public class GameState {
 	
 	public boolean isLose(){
 		return this.getActions().size() == 0;
+	}
+	
+	public Color getTurn(){ 
+		return this.turn;
 	}
 	
 }

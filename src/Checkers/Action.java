@@ -9,7 +9,7 @@ public class Action {
 		this.destination = new Coordinate(dest);
 	}
 	
-	Action(Action other) {
+	public Action(Action other) {
 		setSource(other.getSource());
 		setDestination(other.getDestination());
 	}
