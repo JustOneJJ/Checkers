@@ -180,5 +180,16 @@ public class GameState {
 		}
 	}
 	
+	public boolean isWin() {
+		if(this.turn == Color.WHITE){
+			return this.board.getBlackpieces().size() == 0;
+		}
+		return this.board.getWhitepieces().size() == 0;
+	}
+	
+	public boolean isLose(){
+		return this.getActions().size() == 0;
+	}
+	
 }
 
