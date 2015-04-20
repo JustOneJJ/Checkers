@@ -27,7 +27,7 @@ public class Model extends java.util.Observable {
 			e.printStackTrace();
 		}
 		//Agent agent = new RandomAgent();
-		Agent agent = new MiniMaxAgent();
+		Agent agent = new MiniMaxAgent(6);
 		Action a = agent.computeAction(this.state);
 		this.state = this.state.getNextGameState(a);
 		this.state.printStatus();

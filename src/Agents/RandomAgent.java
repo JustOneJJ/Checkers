@@ -16,7 +16,7 @@ public class RandomAgent implements Agent {
 		return possibleActions.get(index);
 	}
 	
-	public final int EvaluateState(GameState state){
+	public int EvaluateState(GameState state){
 		return state.StateScore();
 	}
 

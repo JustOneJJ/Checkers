@@ -8,7 +8,7 @@ public class Test {
 	public static void main(String[] args) {
 		
 	GameState state = new GameState();
-	Agent player1 = new MiniMaxAgent();
+	Agent player1 = new MiniMaxAgent(4);
 	Agent player2 = new RandomAgent();
 	//System.out.println(state.boardString());
 	

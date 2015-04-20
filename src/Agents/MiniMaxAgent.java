@@ -4,21 +4,25 @@ import java.util.Iterator;
 import java.util.List;
 
 import Checkers.Action;
+import Checkers.Board;
 import Checkers.Color;
 import Checkers.GameState;
+import Checkers.Piece;
 
 public class MiniMaxAgent extends RandomAgent implements Agent{
 	
+	private int depth;
 	private Color plays;
 	
-	public MiniMaxAgent(){
+	public MiniMaxAgent(int depth){
 		super();
+		this.depth = depth;
 	}
 	
 	public Action computeAction(GameState state){
 		
 		this.plays = state.getTurn();
-		Result res = minimax(state, 4);
+		Result res = minimax(state, this.depth);
 		return res.getAction();
 		
 	}
@@ -28,7 +32,7 @@ public class MiniMaxAgent extends RandomAgent implements Agent{
 		Action bestAction = null;
 		
 		if(depth == 0 || state.isWin() || state.isLose()) {
-			return new Result( null, super.EvaluateState(state));
+			return new Result( null, this.EvaluateState(state));
 		}
 		//maximize
 		if(this.plays == Color.WHITE){
@@ -61,6 +65,31 @@ public class MiniMaxAgent extends RandomAgent implements Agent{
 			}
 			return new Result(bestAction, bestValue);
 		}
+	}
+	
+	public int EvaluateState(GameState state){
+		int score = 0;
+		Board b = state.getBoard();
+		List<Piece> white = b.getWhitepieces();
+		Iterator<Piece> PieceIterator = white.iterator();
+		while(PieceIterator.hasNext()){
+			if(PieceIterator.next().isPromoted()){
+				score += 3;
+			}else{
+				score +=1;
+			}
+		}
+		
+		List<Piece> black = b.getBlackpieces();
+		PieceIterator = black.iterator();
+		while(PieceIterator.hasNext()){
+			if(PieceIterator.next().isPromoted()){
+				score -= 3;
+			}else{
+				score -=1;
+			}
+		}
+		return score;
 	}
 	
 	
