@@ -9,15 +9,22 @@ public class Model extends java.util.Observable {
 
 	//private Board b = new Board();
 	private GameState state = new GameState();
+	private Agent agent = new MiniMaxAgent(6);
 
 	public void move(Coordinate from, Coordinate to){
 		Action a = new Action(from, to);
+		if (this.state.hasAction(a)){
 		this.state = this.state.getNextGameState(a);
 		this.state.printStatus();
 		setChanged();
 		notifyObservers(getBoardString());
-		
-		moveAgent();
+		if(!this.state.isMoveAgain()){
+			moveAgent();
+			while(this.state.isMoveAgain()){
+				moveAgent();
+			}
+		}
+		}
 	}
 	
 	public void moveAgent(){
@@ -26,13 +33,21 @@ public class Model extends java.util.Observable {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		//Agent agent = new RandomAgent();
-		Agent agent = new MiniMaxAgent(6);
-		Action a = agent.computeAction(this.state);
+		Action a = this.agent.computeAction(this.state);
 		this.state = this.state.getNextGameState(a);
 		this.state.printStatus();
 		setChanged();
 		notifyObservers(getBoardString());
+	}
+	
+	public void newGame(){
+		this.state = new GameState();
+		setChanged();
+		notifyObservers(getBoardString());
+	}
+	
+	public void setAgent(Agent a){
+		this.agent = a;
 	}
 	
 	public String getBoardString(){

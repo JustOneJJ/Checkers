@@ -1,6 +1,5 @@
 package MVC;
 import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -16,16 +15,21 @@ import javax.swing.*;
 public class View implements java.util.Observer{
 		
 	private JLabel lab = new JLabel("This is North");
+	private JButton button1 = new JButton("New game");
+	private JButton button2 = new JButton("Random agent");
+	private JButton button3 = new JButton("Minimax agent");
 	private JButton[] bArray = new JButton[64];
-	JFrame frame = new JFrame("simple MVC");
+	JFrame frame = new JFrame("Checkers");
 
 	public View(){	    
-		frame = new JFrame("simple MVC");
+		//frame = new JFrame("simple MVC");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel parent = new JPanel(new BorderLayout());
 	    Panel p = new Panel();
         p.add(lab);
-        p.add(new Button("this will do something"));
+        p.add(this.button1);
+        p.add(this.button2);
+        p.add(this.button3);
         parent.add("North",p);
         
         JPanel newpanel = new JPanel(new GridBagLayout());
@@ -81,6 +85,18 @@ public class View implements java.util.Observer{
 		for(int i = 0 ; i < 64; i++){
 			this.bArray[i].addActionListener(listenForButton);
 		}
+	}
+	
+	void addButton1Listener(ActionListener listenForButton ){
+		this.button1.addActionListener(listenForButton);
+	}
+	
+	void addButton2Listener(ActionListener listenForButton ){
+		this.button2.addActionListener(listenForButton);
+	}
+	
+	void addButton3Listener(ActionListener listenForButton ){
+		this.button3.addActionListener(listenForButton);
 	}
 	
 	public void setPieces(String s){

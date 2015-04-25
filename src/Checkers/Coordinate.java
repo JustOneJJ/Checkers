@@ -3,12 +3,28 @@ public final class Coordinate {
 	private int x;
 	private int y;
 	
-	public Coordinate() {
+	public Coordinate(){
 		this(0, 0);
 	}
 	
 	public Coordinate(int x, int y){
+		if (x < -2 || x > 9){
+			try {
+				throw new InvalidX("x is invalid: " + x);
+			} catch (InvalidX e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		this.x = x;
+		if (y < -2 || y > 9){
+			try {
+				throw new InvalidY("y is invalid: " + y);
+			} catch (InvalidY e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		this.y = y;
 	}
 	
@@ -53,11 +69,17 @@ public final class Coordinate {
 		return y;
 	}
 
-	public void setX(int x) {
+	public void setX(int x) throws CoordinateExcepion {
+		if (x < -2 || x > 9){
+			throw new InvalidX("x is invalid: " + x);
+		}
 		this.x = x;
 	}
 
-	public void setY(int y) {
+	public void setY(int y)  throws CoordinateExcepion{
+		if (y < -2 || y > 9){
+			throw new InvalidY("x is invalid: " + y);
+		}
 		this.y = y;
 	}
 	

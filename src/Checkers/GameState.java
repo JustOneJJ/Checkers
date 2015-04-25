@@ -9,6 +9,7 @@ public class GameState {
 	private Color turn;
 	private List<Action> actions = new ArrayList<Action>();
 	private List<Action> takingActions = new ArrayList<Action>();
+	private boolean moveAgain;
 
 	public GameState(){
 		this.board = new Board();
@@ -54,20 +55,31 @@ public class GameState {
 	}
 	
 	public GameState getNextGameState(Action a) {
+		boolean took = false;
 		GameState next = new GameState(this);
+		next.moveAgain = false;
 		if(this.hasAction(a)) {
 			if (this.takingActions.contains(a)){
 				Coordinate src = a.getSource();
 				Coordinate dest = a.getDestination();
 				Coordinate mid = new Coordinate( (src.x()+dest.x())/2, (src.y()+dest.y())/2 );
 				next.board.removePiece(mid);
+				took = true;
 			}
 			Piece p = next.board.takePiece(a.getSource());
 			//System.out.println(p == null);
 			//System.out.println(a.print());
 			p.setCoordinate(a.getDestination());
 			next.board.placePice(p);
-			next.turn = (next.turn == Color.WHITE) ? Color.BLACK : Color.WHITE;
+			GameState temp = new GameState(next);
+			
+			if(took && temp.isCoordinateInTakingActions(a.getDestination() )){
+				next.turn = (next.turn == Color.WHITE) ? Color.WHITE : Color.BLACK;
+				next.setMoveAgain(true);
+				
+			}else{
+				next.turn = (next.turn == Color.WHITE) ? Color.BLACK : Color.WHITE;
+			}
 		}
 		next.computeActions();
 		//next.printActions();
@@ -185,6 +197,33 @@ public class GameState {
 		}
 	}
 	
+	public boolean isCoordinateInTakingActions(Coordinate c){
+		Iterator<Action> actionIterator = this.takingActions.iterator();
+		while(actionIterator.hasNext()){
+			Action a = actionIterator.next();
+			Coordinate src = a.getSource();
+			//System.out.println(c.print() + "==" + src.print());
+			if( c.equals(src)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void removeTakingActions(Coordinate c){
+		Iterator<Action> actionIterator = this.takingActions.iterator();
+		while(actionIterator.hasNext()){
+			Action a = actionIterator.next();
+			Coordinate src = a.getSource();
+			if( !src.equals(c)){
+				System.out.println(this.takingActions.size());
+				this.takingActions.remove(a);
+				this.actions.remove(a);
+				System.out.println(this.takingActions.size());
+			}
+		}
+	}
+	
 	public boolean isWin() {
 		if(this.turn == Color.WHITE){
 			return this.board.getBlackpieces().size() == 0;
@@ -202,6 +241,20 @@ public class GameState {
 	
 	public Board getBoard(){
 		return this.board;
+	}
+
+	/**
+	 * @return the moveAgain
+	 */
+	public boolean isMoveAgain() {
+		return moveAgain;
+	}
+
+	/**
+	 * @param moveAgain the moveAgain to set
+	 */
+	public void setMoveAgain(boolean moveAgain) {
+		this.moveAgain = moveAgain;
 	}
 	
 }

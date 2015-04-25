@@ -4,6 +4,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.SwingWorker;
 
+import Agents.MiniMaxAgent;
+import Agents.RandomAgent;
 import Checkers.Coordinate;
 
 public class Controller {
@@ -16,6 +18,9 @@ public class Controller {
 		this.theView = theView;
 		
 		this.theView.addBoardListener(new BoardListener());
+		this.theView.addButton1Listener(new NewGameListener());
+		this.theView.addButton2Listener(new RandomAgentListener());
+		this.theView.addButton3Listener(new MinimaxAgentListener());
 	}
 
 	class BoardListener implements ActionListener{
@@ -47,7 +52,7 @@ public class Controller {
 			        @Override
 			        protected void done() {
 			            try {
-			            	theView.setTextField1("4 sec passed");
+			            	//theView.setTextField1();
 			            } catch (Exception e) {
 			                //ignore
 			            }
@@ -60,6 +65,27 @@ public class Controller {
 		
 		private Coordinate extractCoordinate(String s) {
 			return new Coordinate( s.charAt(0)-48, s.charAt(1)-48);
+		}
+	}
+	
+	class NewGameListener implements ActionListener{
+		public void actionPerformed(final ActionEvent e){
+			theModel.newGame(); 
+			theView.setTextField1("new game started");
+		}
+	}
+	
+	class RandomAgentListener implements ActionListener{
+		public void actionPerformed(final ActionEvent e){
+			theModel.setAgent(new RandomAgent());
+			theView.setTextField1("playing versus random agent");
+		}
+	}
+	
+	class MinimaxAgentListener implements ActionListener{
+		public void actionPerformed(final ActionEvent e){
+			theModel.setAgent(new MiniMaxAgent(4));
+			theView.setTextField1("playing versus Minimax agent");
 		}
 	}
 	

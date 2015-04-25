@@ -23,8 +23,7 @@ public class MiniMaxAgent extends RandomAgent implements Agent{
 		
 		this.plays = state.getTurn();
 		Result res = minimax(state, this.depth);
-		return res.getAction();
-		
+		return res.getAction();	
 	}
 	
 	private Result minimax(GameState state, int depth) {
