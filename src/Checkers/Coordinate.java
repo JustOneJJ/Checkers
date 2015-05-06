@@ -1,7 +1,12 @@
 package Checkers;
-public final class Coordinate {
+public final class Coordinate implements Cloneable{
 	private int x;
 	private int y;
+	
+	@Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 	
 	public Coordinate(){
 		this(0, 0);

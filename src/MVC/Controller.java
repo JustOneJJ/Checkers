@@ -21,6 +21,7 @@ public class Controller {
 		this.theView.addButton1Listener(new NewGameListener());
 		this.theView.addButton2Listener(new RandomAgentListener());
 		this.theView.addButton3Listener(new MinimaxAgentListener());
+		this.theView.addButton4Listener(new BotListener());
 	}
 
 	class BoardListener implements ActionListener{
@@ -86,6 +87,31 @@ public class Controller {
 		public void actionPerformed(final ActionEvent e){
 			theModel.setAgent(new MiniMaxAgent(4));
 			theView.setTextField1("playing versus Minimax agent");
+		}
+	}
+	
+	class BotListener implements ActionListener{
+		public void actionPerformed(final ActionEvent e){
+		    SwingWorker<String, Object> worker = new SwingWorker<String, Object>() {
+		        @Override
+		        protected String doInBackground() throws Exception { 
+		        	//theModel.moveAgent();
+		        	theModel.botVSbot();
+					theView.setTextField1("BotVSBot");
+		        	return "DONE";
+		        }
+		        @Override
+		        protected void done() {
+		            try {
+		            	//theView.setTextField1();
+		            } catch (Exception e) {
+		                //ignore
+		            }
+		        }
+		    };      
+		    worker.execute();
+		    //=========
+			
 		}
 	}
 	

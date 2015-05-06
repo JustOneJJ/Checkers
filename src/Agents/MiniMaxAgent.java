@@ -19,6 +19,10 @@ public class MiniMaxAgent extends RandomAgent implements Agent{
 		this.depth = depth;
 	}
 	
+	public Agent MakeAgent(){
+		return new MiniMaxAgent(4);
+	}
+	
 	public Action computeAction(GameState state){
 		
 		this.plays = state.getTurn();

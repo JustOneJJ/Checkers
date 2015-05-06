@@ -20,9 +20,9 @@ public class Test {
 	for (int i = 0; i<20; i++ ){
 		System.out.println(i);
 		GameState state = new GameState();
-		Agent player1 = new MiniMaxAgent(3);
+		Agent player1 = new MiniMaxAgent(2);
 		Agent player2 = new RandomAgent();
-		//Agent player2 = new MiniMaxAgent(2);
+		//Agent player2 = new MiniMaxAgent(10);
 		while( !state.isWin() && !state.isLose()){
 			Action a;
 			if(state.getTurn() == Color.WHITE){

@@ -18,6 +18,7 @@ public class View implements java.util.Observer{
 	private JButton button1 = new JButton("New game");
 	private JButton button2 = new JButton("Random agent");
 	private JButton button3 = new JButton("Minimax agent");
+	private JButton button4 = new JButton("botVSbot");
 	private JButton[] bArray = new JButton[64];
 	JFrame frame = new JFrame("Checkers");
 
@@ -30,6 +31,7 @@ public class View implements java.util.Observer{
         p.add(this.button1);
         p.add(this.button2);
         p.add(this.button3);
+        p.add(this.button4);
         parent.add("North",p);
         
         JPanel newpanel = new JPanel(new GridBagLayout());
@@ -97,6 +99,10 @@ public class View implements java.util.Observer{
 	
 	void addButton3Listener(ActionListener listenForButton ){
 		this.button3.addActionListener(listenForButton);
+	}
+	
+	void addButton4Listener(ActionListener listenForButton ){
+		this.button4.addActionListener(listenForButton);
 	}
 	
 	public void setPieces(String s){

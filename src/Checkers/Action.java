@@ -1,13 +1,27 @@
 package Checkers;
-public class Action {
+public class Action implements Cloneable{
 
 	private Coordinate source;
 	private Coordinate destination;
 	
 	public Action(Coordinate src, Coordinate dest) {
-		this.source = new Coordinate(src);
+		//this.source = new Coordinate(src);
+		try {
+			this.source = (Coordinate)src.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.destination = new Coordinate(dest);
 	}
+	
+	@Override
+    protected Object clone() throws CloneNotSupportedException {
+        Action cloned = (Action)super.clone();
+        cloned.setSource( (Coordinate)cloned.getSource().clone() );
+        cloned.setDestination( (Coordinate)cloned.getDestination().clone() );
+        return cloned;
+    }
 	
 	public Action(Action other) {
 		setSource(other.getSource());
